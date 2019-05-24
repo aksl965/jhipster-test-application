@@ -1,0 +1,35 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="adjudication">
+            <h2><span>Adjudication</span> {{adjudication.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Claimnumber</span></dt>
+                <dd>
+                    <span>{{adjudication.claimnumber}}</span>
+                </dd>
+                <dt><span>Casenumber</span></dt>
+                <dd>
+                    <span>{{adjudication.casenumber}}</span>
+                </dd>
+                <dt><span>Eob</span></dt>
+                <dd>
+                    <span>{{adjudication.eob}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/adjudication', adjudication.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

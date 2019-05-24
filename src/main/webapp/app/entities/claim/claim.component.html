@@ -1,0 +1,74 @@
+<div>
+    <h2 id="page-heading">
+        <span>Claims</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-claim" [routerLink]="['/claim/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create new Claim
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="claims">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
+            <th jhiSortBy="id"><span>ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="claimNo"><span>Claim No</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="claimType"><span>Claim Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="claimAmount"><span>Claim Amount</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="claimDate"><span>Claim Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="content"><span>Content</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="patient.id"><span>Patient</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="adjudication.id"><span>Adjudication</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+            <tr *ngFor="let claim of claims ;trackBy: trackId">
+                <td><a [routerLink]="['/claim', claim.id, 'view' ]">{{claim.id}}</a></td>
+                <td>{{claim.claimNo}}</td>
+                <td>{{claim.claimType}}</td>
+                <td>{{claim.claimAmount}}</td>
+                <td>{{claim.claimDate | date:'medium'}}</td>
+                <td>{{claim.content}}</td>
+                <td>
+                    <div *ngIf="claim.patient">
+                        <a [routerLink]="['../patient', claim.patient?.id, 'view' ]" >{{claim.patient?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="claim.adjudication">
+                        <a [routerLink]="['../adjudication', claim.adjudication?.id, 'view' ]" >{{claim.adjudication?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/claim', claim.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/claim', claim.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', 'claim', { outlets: { popup: claim.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
