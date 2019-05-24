@@ -1,0 +1,64 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-claim-heading">Create or edit a Claim</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!claim.id">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_claimNo">Claim No</label>
+                    <input type="number" class="form-control" name="claimNo" id="field_claimNo"
+                           formControlName="claimNo"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_claimType">Claim Type</label>
+                    <input type="text" class="form-control" name="claimType" id="field_claimType"
+                           formControlName="claimType"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_claimAmount">Claim Amount</label>
+                    <input type="number" class="form-control" name="claimAmount" id="field_claimAmount"
+                           formControlName="claimAmount"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_claimDate">Claim Date</label>
+                    <div class="d-flex">
+                        <input id="field_claimDate" type="datetime-local" class="form-control" name="claimDate" formControlName="claimDate" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_content">Content</label>
+                    <textarea class="form-control" name="content" id="field_content"
+                              formControlName="content"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_patient">Patient</label>
+                    <select class="form-control" id="field_patient" name="patient" formControlName="patient">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="patientOption.id === editForm.get('patient').value?.id ? editForm.get('patient').value : patientOption" *ngFor="let patientOption of patients; trackBy: trackPatientById">{{patientOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_adjudication">Adjudication</label>
+                    <select class="form-control" id="field_adjudication" name="adjudication" formControlName="adjudication">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="adjudicationOption.id === editForm.get('adjudication').value?.id ? editForm.get('adjudication').value : adjudicationOption" *ngFor="let adjudicationOption of adjudications; trackBy: trackAdjudicationById">{{adjudicationOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

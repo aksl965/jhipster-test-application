@@ -1,0 +1,47 @@
+{
+    "name": "Enrollment",
+    "fields": [
+        {
+            "fieldName": "planType",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "plantName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "premiumValue",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "fromDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "toDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "content",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipName": "patient",
+            "otherEntityName": "patient",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20190524060407",
+    "entityTableName": "enrollment",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

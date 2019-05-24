@@ -1,0 +1,34 @@
+{
+    "name": "Adjudication",
+    "fields": [
+        {
+            "fieldName": "claimnumber",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "casenumber",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "eob",
+            "fieldType": "Long"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "claim",
+            "otherEntityRelationshipName": "adjudication",
+            "relationshipName": "claim"
+        }
+    ],
+    "changelogDate": "20190524060409",
+    "entityTableName": "adjudication",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

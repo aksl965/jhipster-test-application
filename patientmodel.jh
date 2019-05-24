@@ -1,0 +1,63 @@
+entity Patient {
+	firstName String,
+	lastName String,
+	email String,
+	phoneNumber String,
+	birthDate Instant,
+	age Long
+}
+
+entity Enrollment {
+	planType String,
+	plantName String,
+	premiumValue Long,
+	fromDate Instant,
+	toDate Instant,
+    content TextBlob
+}
+
+entity Claim {
+	claimNo Long,
+	claimType String,
+	claimAmount Long,
+	claimDate Instant,
+    content TextBlob
+}
+
+entity Adjudication {
+	claimnumber Long,
+    casenumber Long,
+	eob Long
+}
+
+relationship OneToMany {
+	Patient{claim(claimNo)} to Claim
+}
+
+relationship OneToMany {
+	Patient{enrollment(palnType)} to Enrollment
+}
+
+relationship OneToMany {
+	Adjudication{claim(claimNo)} to Claim
+}
+
+/*
+//relationship ManyToMany {
+//	Adjudication{amountEnrollment} to Enrollment,
+//    Adjudication{amountPatient} to Patient,
+//    Adjudication{amountClaim} to Claim/
+//}
+*/
+// Set pagination options
+paginate Patient, Claim with infinite-scroll
+paginate Adjudication with pagination
+
+// Use Data Transfert Objects (DTO)
+// dto * with mapstruct
+
+// Set service options to all except few
+//service Patient, Claim, Enrollment, Adjudication
+
+// Set an angular suffix
+// angularSuffix * with mySuffix

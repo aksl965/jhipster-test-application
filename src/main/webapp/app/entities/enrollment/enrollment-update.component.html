@@ -1,0 +1,63 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-enrollment-heading">Create or edit a Enrollment</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!enrollment.id">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_planType">Plan Type</label>
+                    <input type="text" class="form-control" name="planType" id="field_planType"
+                           formControlName="planType"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_plantName">Plant Name</label>
+                    <input type="text" class="form-control" name="plantName" id="field_plantName"
+                           formControlName="plantName"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_premiumValue">Premium Value</label>
+                    <input type="number" class="form-control" name="premiumValue" id="field_premiumValue"
+                           formControlName="premiumValue"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_fromDate">From Date</label>
+                    <div class="d-flex">
+                        <input id="field_fromDate" type="datetime-local" class="form-control" name="fromDate" formControlName="fromDate" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_toDate">To Date</label>
+                    <div class="d-flex">
+                        <input id="field_toDate" type="datetime-local" class="form-control" name="toDate" formControlName="toDate" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_content">Content</label>
+                    <textarea class="form-control" name="content" id="field_content"
+                              formControlName="content"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_patient">Patient</label>
+                    <select class="form-control" id="field_patient" name="patient" formControlName="patient">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="patientOption.id === editForm.get('patient').value?.id ? editForm.get('patient').value : patientOption" *ngFor="let patientOption of patients; trackBy: trackPatientById">{{patientOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

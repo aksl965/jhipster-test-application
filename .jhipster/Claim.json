@@ -1,0 +1,49 @@
+{
+    "name": "Claim",
+    "fields": [
+        {
+            "fieldName": "claimNo",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "claimType",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "claimAmount",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "claimDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "content",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipName": "patient",
+            "otherEntityName": "patient",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "adjudication",
+            "otherEntityName": "adjudication",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20190524060408",
+    "entityTableName": "claim",
+    "dto": "no",
+    "pagination": "infinite-scroll",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

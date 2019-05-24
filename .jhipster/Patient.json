@@ -1,0 +1,52 @@
+{
+    "name": "Patient",
+    "fields": [
+        {
+            "fieldName": "firstName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "lastName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "email",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "phoneNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "birthDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "age",
+            "fieldType": "Long"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "claim",
+            "otherEntityRelationshipName": "patient",
+            "relationshipName": "claim"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "enrollment",
+            "otherEntityRelationshipName": "patient",
+            "relationshipName": "enrollment"
+        }
+    ],
+    "changelogDate": "20190524060406",
+    "entityTableName": "patient",
+    "dto": "no",
+    "pagination": "infinite-scroll",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}
